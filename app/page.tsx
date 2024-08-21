@@ -17,8 +17,12 @@ export default function Home() {
     const [userData, setUserData] = useState<UserData | null>(null)
 
     useEffect(() => {
-        if (WebApp.initDataUnsafe.user) {
-            setUserData(WebApp.initData as any)
+        if (WebApp.initData) {
+            let data = ""
+            data += JSON.stringify(WebApp.initData)
+            data += "/n"
+            data += JSON.stringify(WebApp.initDataUnsafe)
+            setUserData(data as any)
         }
     }, [])
 
@@ -27,7 +31,7 @@ export default function Home() {
             {userData ? (
                 <>
                     <h1 className='text-2xl font-bold mb-4'>User Data</h1>
-                    {JSON.stringify(userData)}
+                    {userData}
                 </>
             ) : (
                 <div>Loading...</div>
