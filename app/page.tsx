@@ -2,8 +2,8 @@
 
 import WebApp from "@twa-dev/sdk"
 import axios from "axios"
-import { useState } from "react"
-// Define the interface for user data
+import { useEffect, useState } from "react"
+
 interface UserData {
     _id: string
     deletedAt: null
@@ -30,8 +30,12 @@ interface UserData {
 export default function Home() {
     const [userData, setUserData] = useState<UserData | null>(null)
 
+    useEffect(() => {
+        // Client-side only code can go here
+    }, []) // Empty dependency array ensures this runs once after mount
+
     const login = async () => {
-        if (WebApp.initData) {
+        if (typeof window !== "undefined" && WebApp.initData) {
             const baseUrl = "https://hammerhead-app-bi7qz.ondigitalocean.app"
             const token = JSON.stringify(WebApp.initData)
             const data = await axios.post(
@@ -63,65 +67,52 @@ export default function Home() {
             setUserData(data.data.data)
         }
     }
+
     return (
         <main>
             {userData ? (
                 <div className='user-profile max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mt-6'>
                     <h1 className='text-2xl font-bold mb-4 text-gray-800'>User Profile</h1>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>ID:</strong> {userData.id}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Name:</strong> {userData.name}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Email:</strong> {userData.email || "N/A"}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Telegram Premium User:</strong> {userData.isTelegramPremiumUser ? "Yes" : "No"}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Experience Points:</strong> {userData.exp}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Last Login Date:</strong> {new Date(userData.lastLoginDate).toLocaleString()}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Referral Code:</strong> {userData.refCode}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Referral Points:</strong> {userData.referralPoint}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Premium Referral Points:</strong> {userData.premiumReferralPoint}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Session ID:</strong> {userData.sessionId}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Country Code:</strong> {userData.countryCode || "N/A"}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Last Login IP:</strong> {userData.lastLoginIP || "N/A"}
                     </p>
-
                     <p className='mb-4'>
                         <strong className='text-gray-700'>Avatar:</strong>
                         {userData.avatar ? <img src={userData.avatar} alt='User Avatar' className='w-16 h-16 rounded-full mt-2' /> : "No Avatar"}
                     </p>
-
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Play Time:</strong> {userData.playTime} hours
                     </p>
