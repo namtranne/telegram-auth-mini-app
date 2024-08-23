@@ -25,6 +25,8 @@ interface UserData {
     lastLoginIP: string
     avatar: string
     playTime: number
+    gamePlay: number
+    gameWin: number
 }
 
 export default function Home() {
@@ -53,7 +55,7 @@ export default function Home() {
             setUserData(data.data.data)
         } else {
             const baseUrl = "http://localhost:3000"
-            const token = "query_id=AAFSUlFTAgAAAFJSUVMKtQPh&user=%7B%22id%22%3A5692805714%2C%22first_name%22%3A%22Tr%E1%BA%A7n%22%2C%22last_name%22%3A%22Nam%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1724403024&hash=e76b4a90cb198646742f5ad439827b5de54e695b2a2ed12cf3674b1dceb9522f"
+            const token = "query_id=AAHW3RpYAgAAANbdGliv5Fr0&user=%7B%22id%22%3A5773123030%2C%22first_name%22%3A%22Huy%22%2C%22last_name%22%3A%22Bui%22%2C%22language_code%22%3A%22vi%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1724405024&hash=2d9111eeddd3bc64f4caba4c68a2a0cb9389e2fb69782e448ec84ddf6ce4f830"
             const data = await axios.post(
                 "auth/login",
                 {},
@@ -65,6 +67,7 @@ export default function Home() {
                     }
                 }
             )
+            console.log(data)
             setUserData(data.data.data)
         }
     }
@@ -116,6 +119,12 @@ export default function Home() {
                     </p>
                     <p className='mb-2'>
                         <strong className='text-gray-700'>Play Time:</strong> {userData.playTime} hours
+                    </p>
+                    <p className='mb-2'>
+                        <strong className='text-gray-700'>Game Play:</strong> {userData.gamePlay} games
+                    </p>
+                    <p className='mb-2'>
+                        <strong className='text-gray-700'>Game Win:</strong> {userData.gameWin} games
                     </p>
                 </div>
             ) : (
