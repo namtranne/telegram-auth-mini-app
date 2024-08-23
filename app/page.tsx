@@ -37,7 +37,7 @@ export default function Home() {
     const login = async () => {
         if (typeof window !== "undefined" && WebApp.initData) {
             const baseUrl = "https://hammerhead-app-bi7qz.ondigitalocean.app"
-            const token = JSON.stringify(WebApp.initData)
+            const token = WebApp.initData
             console.log(token)
             const data = await axios.post(
                 "auth/login",
@@ -53,7 +53,7 @@ export default function Home() {
             setUserData(data.data.data)
         } else {
             const baseUrl = "http://localhost:3000"
-            const token = "query_id=AAFSUlFTAgAAAFJSUVNomVpk&user=%7B%22id%22%3A5692805714%2C%22first_name%22%3A%22Tr%E1%BA%A7n%22%2C%22last_name%22%3A%22Nam%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1724396229&hash=ee057ccdc14e677bc2acd7c9d7f04e2710c182105b11fefbba4ab02985b27137"
+            const token = "query_id=AAFSUlFTAgAAAFJSUVMKtQPh&user=%7B%22id%22%3A5692805714%2C%22first_name%22%3A%22Tr%E1%BA%A7n%22%2C%22last_name%22%3A%22Nam%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1724403024&hash=e76b4a90cb198646742f5ad439827b5de54e695b2a2ed12cf3674b1dceb9522f"
             const data = await axios.post(
                 "auth/login",
                 {},
