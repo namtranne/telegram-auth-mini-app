@@ -38,6 +38,7 @@ export default function Home() {
         if (typeof window !== "undefined" && WebApp.initData) {
             const baseUrl = "https://hammerhead-app-bi7qz.ondigitalocean.app"
             const token = JSON.stringify(WebApp.initData)
+            console.log(token)
             const data = await axios.post(
                 "auth/login",
                 {},
