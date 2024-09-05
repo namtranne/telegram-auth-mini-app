@@ -33,7 +33,6 @@ export default function Home() {
     const [userData, setUserData] = useState<UserData | null>(null)
 
     useEffect(() => {
-        console.log(WebApp.initData)
         // Client-side only code can go here
     }, []) // Empty dependency array ensures this runs once after mount
 
